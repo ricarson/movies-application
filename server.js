@@ -9,5 +9,5 @@ server.use(staticMiddleware('public'));
 server.use('/api', router);
 
 server.listen(3000, () => {
-    console.log('JSON Server is running')
+    console.log('JSON Server is running');
 });
