@@ -2,47 +2,50 @@
 const $ = require('jquery');
 
 
-const active=[];
-const loadCSS = (cssFile)=>{
-    // Get HTML head element
-    let head = document.getElementsByTagName('HEAD')[0];
 
-    // Create new link Element
-    let link = document.createElement('link');
+class Template{
+    constructor(name,htmlsource) {
+        this.name = name;
+        this.html=htmlsource;
+        Template.templates[this.name] = this;
+    }
+    load () {
+        this.loadCSS(`css/${this.name}.css`);
+        return this.html;
+    }
+    unload (nextTemplate){
+        this.unloadCSS();
+        if(nextTemplate)
+            return nextTemplate.load();
+        else
+            return'';
+    }
+    loadCSS(cssFile){
+        // Get HTML head element
+        let head = document.getElementsByTagName('HEAD')[0];
 
-    // set the attributes for link element
-    link.rel = 'stylesheet';
+        // Create new link Element
+        let link = document.createElement('link');
 
-    link.type = 'text/css';
+        // set the attributes for link element
+        link.rel = 'stylesheet';
 
-    link.href = cssFile;
+        link.type = 'text/css';
 
-    // Append link element to HTML head
-    head.appendChild(link);
+        link.href = cssFile;
 
-    active.push(link)
-};
+        // Append link element to HTML head
+        head.appendChild(link);
 
-const unloadCSS = (cssFile)=> {
-    let head = document.getElementsByTagName('HEAD')[0];
-
-    let link = active.reduce((accumulator,current)=>{
-        if(current.href===cssFile){
-            accumulator=cssFile;
-        }
-        return accumulator;
-    });
-
-    $(link).remove();
-
-    active.splice(active.indexOf(link),1);
-};
-const template = (templateName)=>{
-    console.log(templateName);
-    const curTemplate = require(`./${templateName}`);
-    curTemplate.templateName = templateName;
-    console.log(curTemplate);
-    return curTemplate;
+        this.css = link
+    }
+    unloadCSS () {
+        $(this.css).remove();
+    }
 }
+Template.templates={};
+module.exports={Template};
 
-module.exports={active,template,loadCSS,unloadCSS};
+
+
+require('./loadingScreen.js');
