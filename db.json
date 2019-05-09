@@ -4,14 +4,23 @@
       "title": "Casablanca",
       "rating": "4",
       "poster": "img/casa.jpg",
-      "genres": ["drama","romance","war"],
+      "genres": [
+        "drama",
+        "romance",
+        "war"
+      ],
       "id": 1
     },
     {
       "title": "Star Wars: A New Hope",
       "rating": "5",
       "poster": "img/starwars.jpeg",
-      "genres": ["action","adventure","fantasy","war"],
+      "genres": [
+        "action",
+        "adventure",
+        "fantasy",
+        "war"
+      ],
       "id": 2
     }
   ]

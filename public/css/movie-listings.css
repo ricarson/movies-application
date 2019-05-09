@@ -12,7 +12,9 @@
     border:5px solid black;
     border-radius: 2px;
 }
-
+.addMovie{
+    text-align:right;
+}
 /*code for rating stars*/
 .rate {
     float: left;
@@ -39,7 +41,7 @@
 .rate > label:before {
     content: '★ ';
 }
-label[checked] ~ label {
+.rate label[checked] ~ label {
     color: #ccc;
 }
 /*code for rating stars*/

@@ -15,6 +15,9 @@ let template =`
         <div class="col-1">
             <h4>{GENRE}</h4>
         </div>
+        <div class="col-2 ml-auto addMovie">
+            <button class="btn btn-dark" id="addMovie"><i class="fas fa-plus"></i> Add Movie</button>
+        </div>
     </div>
     <div class="row">
         {INSERT HERE}
@@ -42,4 +45,7 @@ const onload = (data) =>{
     let newTemplate = template.replace("{INSERT HERE}",buffer).replace("{GENRE}",utils.Capitalize(utils.curGenre));
     return newTemplate;
 };
+
+
+
 new utils.Template(templateName,template,onload);

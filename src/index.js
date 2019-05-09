@@ -21,7 +21,7 @@ let genreList=["all"];
 
 console.log(utils.Template.templates);
 
-// $(document).on('click','#addGenre button',()=>{unloadTemplateCSS('css/loadingScreen.css')});
+
 $(document).on('click','.genreListing',(e)=>{
   let me=e.target;
   utils.curGenre=me.innerText.toLowerCase();
@@ -59,9 +59,23 @@ const processMovieData=movieData=>{
   });
   console.log(buffer);
   gc.html(buffer);
+};
+
+const addMovie=data=>{
 
 }
 
+$(document).on('click','#addMovieSubmit',(e)=> {
+  e.preventDefault();
+  let genres = $("#addMovieGenres").val().split(",");
+  console.log(genres);
+  let data={
+    title:$("#addMovieName").val(),
+    rating:$("#addMovieRating").val(),
+    genres
+  };
+  $.post("/api/movies",data)
+});
 
 getMovies().then(processMovieData).catch((error) => {
   alert('Oh no! Something went wrong.\nCheck the console for details.');
