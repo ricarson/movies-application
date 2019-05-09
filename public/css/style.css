@@ -1,0 +1,47 @@
+*{
+    --dark-bg-color:#222222;
+    --dark-bg-color2:#333;
+    --dark-highlight-color:#333;
+    --light-bg-color:#dddddd;
+    --dark-text-color:#111111;
+    --light-text-color:#eeeeee;
+}
+html, body {
+    height: 100%;
+    margin:0;
+}
+
+.container-fluid {
+    min-height:100%;
+    height:100%;
+    text-align: center;
+}
+#sidebar{
+    background-color:var(--dark-bg-color);
+    color:var(--light-text-color);
+    text-align:right;
+    padding-top:2em;
+}
+#sidebar>.row{
+    margin-bottom:2em;
+}
+#movieSearch{
+}
+#addGenre{
+    text-align:left;
+}
+#genreContainer{
+}
+#main{
+    background-color:var(--dark-bg-color2);
+    color:var(--light-text-color);
+}
+.genreListing {
+    transition:all 0.5s ease;
+    padding:0.5em 2em 0.5em 0em;
+
+}
+.genreListing:hover{
+    background-color: var(--dark-highlight-color);
+    cursor:pointer;
+}

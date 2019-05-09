@@ -1,17 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <title>My Application</title>
-    <link rel="stylesheet" href="/style.css" />
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8" />
+        <title>My Application</title>
+        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
-    <div class="container">
-        <h1>Hello There!</h1>
-        <p>To get started, edit <code>src/index.js</code>.</p>
-    </div>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row h-100">
+                <div id="sidebar" class="col-3">
+                    <div id="movieSearch" class="row">
+                        <div class="col">
+                            <input class="form-control" type="text" placeholder="Search..">
+                        </div>
+                    </div>
+                    <div id="addGenre" class="row">
+                        <div class="col">
+                            <button class="btn btn-dark"><i class="fas fa-plus"></i> Add Genre</button>
+                        </div>
+                    </div>
+                    <div id="genreContainer" class="row">
+                        <div class="col">
+                            <div class="row genreListing">
+                                <div class="col">
+                                    <span>test1</span>
+                                </div>
+                            </div>
+                            <div class="row genreListing">
+                                <div class="col">
+                                    <span>test2</span>
+                                </div>
+                            </div>
+                            <div class="row genreListing">
+                                <div class="col">
+                                    <span>test3</span>
+                                </div>
+                            </div>
+                            <div class="row genreListing">
+                                <div class="col">
+                                    <span>test4</span>
+                                </div>
+                            </div>
+                            <div class="row genreListing">
+                                <div class="col">
+                                    <span>test5</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="main" class="col">
 
-    <script src="./main.js"></script>
-</body>
+                </div>
+            </div>
+        </div>
+
+        <script src="./main.js"></script>
+    </body>
 </html>
