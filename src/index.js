@@ -7,19 +7,26 @@ sayHello('World');
 /**
  * require style imports
  */
-const {getMovies} = require('./api.js');
-
-const utils = require('./utils.js');
 
 const $ = require('jquery');
 
 
+const {getMovies} = require('./api.js');
+
+
+
+const utils = require('./utils.js');
+const templates = utils.Template.templates;
+
+
+console.log(utils.Template.templates);
+
 // $(document).on('click','#addGenre button',()=>{unloadTemplateCSS('css/loadingScreen.css')});
-$(document).on('click','#addGenre button',()=>{$("#main").html(utils.template('loadingScreen').unload())});
+$(document).on('click','#addGenre button',()=>{$("#main").html(templates["loadingScreen"].unload())});
 
 
 
-$('#main').html(utils.template('loadingScreen').load());
+$('#main').html(templates["loadingScreen"].load());
 
 getMovies().then((movies) => {
   console.log('Here are all the movies:');

@@ -1,7 +1,7 @@
 
 const utils = require('./utils.js');
-const templateName = "loadingScreen";
 
+const templateName = "loadingScreen";
 const template=`
 <div id="loadingText" class="row">
     <div class="col">
@@ -11,17 +11,4 @@ const template=`
 `
 
 
-
-const load= () => {
-    utils.loadCSS(`css/${templateName}.css`);
-    return template;
-};
-const unload= (nextTemplate) => {
-    utils.unloadCSS(`css/${templateName}.css`);
-    if(nextTemplate)
-        return nextTemplate.load();
-    else
-        return'';
-
-};
-module.exports={load,unload};
+new utils.Template(templateName,template);
