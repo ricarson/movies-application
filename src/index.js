@@ -371,7 +371,7 @@ function cheater() {
   }, 0);
   console.log(tempMoviesData);
   if(tempMoviesData !== 0) {
-    if (tempMoviesData.movie !== "") {
+    if (tempMoviesData.movie !== "" && tempMoviesData.movie !==undefined) {
       window.open(tempMoviesData.movie);
     }
   }else{
