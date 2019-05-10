@@ -44,12 +44,17 @@ const onload = (data) =>{
     });
     tempMoviesData.forEach(({title, rating,poster,genres, id}) => {
         if(genres.includes(utils.curGenre) || utils.curGenre ==="all") {
+            console.log(title);
             buffer += "<div class='col-2 movie'>";
             buffer += `<div class="row"><div class="col-12"><img src="${poster}"></img></div></div>`;
             buffer += `<div class="row"><div class="col-12"><strong>${title}</strong></div></div>`;
 
             let curRating = ratingStars.split('></label>');
             curRating[parseInt(rating) - 1] += ' checked';
+            console.log(parseInt(rating) != parseFloat(rating));
+            if(parseInt(rating) != parseFloat(rating)){
+                curRating[parseInt(rating) - 1]+=" data-half"
+            }
             curRating = curRating.join("></label>");
             buffer += `<div class="row rating"><div class="col-12">${curRating}</div></div>`;
             buffer += `<span hidden>${id}</span>`;

@@ -50,4 +50,10 @@
 .rate label[checked] ~ label {
     color: #ccc;
 }
+
+.rate label[data-half]+label{
+    background: linear-gradient(90deg, #deb217,#deb217,#deb217,#deb217,#deb217, #ccc, #ccc, #ccc, #ccc, #ccc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 /*code for rating stars*/
