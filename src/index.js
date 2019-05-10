@@ -57,24 +57,49 @@ const processMovieData=movieData=>{
     genre = utils.Capitalize(genre);
     buffer+=(genreTemplate.replace("{GENRE}",genre));
   });
-  console.log(buffer);
   gc.html(buffer);
 };
 
-const addMovie=data=>{
-
-}
+$(document).on('click','#addMovie',(e)=> {
+  let buffer = templates["movie-listings"].unload(templates["add-movie"]);
+  console.log(buffer);
+  $("#main").html(buffer);
+});
 
 $(document).on('click','#addMovieSubmit',(e)=> {
-  e.preventDefault();
   let genres = $("#addMovieGenres").val().split(",");
-  console.log(genres);
-  let data={
-    title:$("#addMovieName").val(),
-    rating:$("#addMovieRating").val(),
-    genres
-  };
-  $.post("/api/movies",data)
+  genres = genres.map(genre=>{
+    return genre.trim().toLowerCase();
+  });
+  let title = $("#addMovieName").val();
+  let rating = $("#addMovieRating").val();
+  let poster = $("#addMoviePoster").val();
+
+  if (rating > 5) rating = 5;
+  if (rating < 1) rating = 1;
+  if(title && genres && rating){
+    let data={
+      title,
+      rating,
+      genres,
+      poster
+    };
+
+    let tdata = data
+
+    tdata.id = parseInt(moviesData.slice(-1)[0].id)+1
+    moviesData.push(tdata)
+
+    processMovieData(moviesData);
+
+    $.ajax({
+      type: 'POST', 
+      url: '/api/movies', 
+      data: JSON.stringify(data),
+      contentType: "application/json; charset=utf-8"
+    }).then().catch();
+  }
+  e.preventDefault();
 });
 
 getMovies().then(processMovieData).catch((error) => {

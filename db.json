@@ -22,6 +22,61 @@
         "war"
       ],
       "id": 2
+    },
+    {
+      "title": "Avengers: Endgame",
+      "rating": 4,
+      "genres": [
+        "action",
+        "adventure",
+        "fantasy"
+      ],
+      "poster": "https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SY1000_CR0,0,674,1000_AL_.jpg",
+      "id": 3
+    },
+    {
+      "title": "Pokémon: Detective Pikachu",
+      "rating": 3,
+      "genres": [
+        "animation", 
+        "action", 
+        "adventure"
+      ],
+      "poster": "https://m.media-amazon.com/images/M/MV5BNDU4Mzc3NzE5NV5BMl5BanBnXkFtZTgwMzE1NzI1NzM@._V1_UX182_CR0,0,182,268_AL_.jpg",
+      "id": 4
+    },
+    {
+      "title": "The Intruder (2019)",
+      "rating": 2,
+      "genres": [
+        "drama", 
+        "horror", 
+        "mystery"
+      ],
+      "poster": "https://m.media-amazon.com/images/M/MV5BMzg1ZjcxNjgtMTliNC00NzU3LWE3NGMtZTBjMWFmYzk4OWE0XkEyXkFqcGdeQXVyMDA4NzMyOA@@._V1_UX182_CR0,0,182,268_AL_.jpg",
+      "id": 5
+    },
+    {
+      "title": "Captain Marvel",
+      "rating": 3,
+      "genres": [
+        "action", 
+        "adventure",
+        "sci-fi"
+      ],
+      "poster": "https://m.media-amazon.com/images/M/MV5BMTE0YWFmOTMtYTU2ZS00ZTIxLWE3OTEtYTNiYzBkZjViZThiXkEyXkFqcGdeQXVyODMzMzQ4OTI@._V1_UX182_CR0,0,182,268_AL_.jpg",
+      "id": 6
+    },
+    {
+      "title": "Shazam!",
+      "rating": 4,
+      "genres": [
+        "action", 
+        "adventure",
+        "comedy"
+      ],
+      "poster": "https://m.media-amazon.com/images/M/MV5BYTE0Yjc1NzUtMjFjMC00Y2I3LTg3NGYtNGRlMGJhYThjMTJmXkEyXkFqcGdeQXVyNTI4MzE4MDU@._V1_UX182_CR0,0,182,268_AL_.jpg",
+      "id": 6
     }
   ]
 }

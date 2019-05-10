@@ -67,3 +67,4 @@ module.exports={Template,curGenre,Capitalize};
 
 require('./loadingScreen.js');
 require('./movie-listings.js');
+require('./add-movie.js');

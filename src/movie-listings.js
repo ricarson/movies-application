@@ -16,7 +16,7 @@ let template =`
             <h4>{GENRE}</h4>
         </div>
         <div class="col-2 ml-auto addMovie">
-            <button class="btn btn-dark" id="addMovie"><i class="fas fa-plus"></i> Add Movie</button>
+            <button type="button" class="btn btn-dark" id="addMovie"><i class="fas fa-plus"></i> Add Movie</button>
         </div>
     </div>
     <div class="row">
