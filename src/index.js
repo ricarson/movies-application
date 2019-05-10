@@ -21,6 +21,17 @@ let genreList=["all"];
 
 console.log(utils.Template.templates);
 
+$(document).on('input','#movieSearch input',(e)=>{
+  let nameFilter = e.target.value.toLowerCase();
+  let tempMoviesData = moviesData.reduce((accumulator, curMovie) => {
+    if (curMovie.title.toLowerCase().indexOf(nameFilter) != -1) {
+      accumulator.push(curMovie);
+    }
+    return accumulator;
+  }, []);
+  let buffer = templates["movie-listings"].unload(templates["movie-listings"],tempMoviesData);
+  $("#main").html(buffer);
+});
 
 $(document).on('click','.genreListing',(e)=>{
   let me=e.target;
