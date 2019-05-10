@@ -5,6 +5,7 @@
     --light-bg-color:#dddddd;
     --dark-text-color:#111111;
     --light-text-color:#eeeeee;
+    --custom-red:#ff5555;
 }
 html, body {
     height: 100%;

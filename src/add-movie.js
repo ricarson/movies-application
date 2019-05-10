@@ -43,6 +43,9 @@ let template =`
             <button type="submit" class="btn btn-dark" id="addMovieSubmit">Submit</button>
         </form>
     </div>
+    <div>
+        <i id="closeAddMovie" class="far fa-times-circle fa-2x"></i>
+    </div>
 </div>
 `
 
