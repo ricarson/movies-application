@@ -66,6 +66,13 @@ $(document).on('click','#addMovie',(e)=> {
   $("#main").html(buffer);
 });
 
+$(document).on('click','#closeAddMovie',(e)=> {
+  let buffer = templates["add-movie"].unload(templates["movie-listings"],moviesData);
+  console.log(buffer);
+  $("#main").html(buffer);
+});
+
+
 $(document).on('click','#addMovieSubmit',(e)=> {
   let genres = $("#addMovieGenres").val().split(",");
   genres = genres.map(genre=>{

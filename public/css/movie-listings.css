@@ -1,5 +1,7 @@
 .movie {
     height: 350px;
+    min-width:250px;
+    max-width:250px;
     background-color:var(--dark-bg-color);
     margin: 0.5em 1em 1em 1em;
     padding: 1em;

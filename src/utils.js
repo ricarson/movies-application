@@ -56,8 +56,8 @@ class Template{
     }
     unloadCSS () {
         console.log(this.css);
-        $(this.css).remove();
-        this.loaded=false;
+        //$(this.css).remove();
+        //this.loaded=false;
     }
 }
 Template.templates={};

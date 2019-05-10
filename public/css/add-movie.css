@@ -4,3 +4,11 @@
 #addNewMovieForm .col{
     text-align:left;
 }
+#closeAddMovie{
+    transition:all 0.3s ease;
+}
+#closeAddMovie:hover{
+    transform:scale(1.2);
+    cursor: pointer;
+    color:var(--custom-red);
+}
