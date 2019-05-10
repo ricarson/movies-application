@@ -54,7 +54,7 @@ const onload = (data) =>{
             buffer += `<div class="row rating"><div class="col-12">${curRating}</div></div>`;
             buffer += `<span hidden>${id}</span>`;
             buffer += "</div>";
-            console.log(`id#${id} - ${title} - rating: ${rating}`);
+            // console.log(`id#${id} - ${title} - rating: ${rating}`);
         }
     });
     let newTemplate = template.replace("{INSERT HERE}",buffer).replace("{GENRE}",utils.Capitalize(utils.curGenre));

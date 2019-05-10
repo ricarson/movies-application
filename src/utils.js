@@ -11,7 +11,7 @@ const Capitalize=(string)=>{
         newStrArray.push(word.charAt(0).toUpperCase() + word.slice(1))
     });
     newStrArray = newStrArray.join(" ");
-    console.log(newStrArray);
+    // console.log(newStrArray);
 
     stringArray = newStrArray.split("-");
     newStrArray=[];
