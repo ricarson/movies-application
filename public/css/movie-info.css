@@ -1,0 +1,24 @@
+#editMovieForm .col-3{
+    text-align:right;
+}
+#editMovieForm .col{
+    text-align:left;
+}
+#editMovieForm input{
+    width:100%;
+}
+#editMovieForm{
+    background-color: var(--dark-bg-color);
+    padding:2em;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+#closeEditMovie{
+    transition:all 0.3s ease;
+}
+#closeEditMovie:hover{
+    transform:scale(1.2);
+    cursor: pointer;
+    color:var(--custom-red);
+}

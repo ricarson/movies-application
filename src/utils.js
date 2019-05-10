@@ -5,7 +5,21 @@ const $ = require('jquery');
 let curGenre="all";
 
 const Capitalize=(string)=>{
-    return string.charAt(0).toUpperCase() + string.slice(1)
+    let stringArray = string.split(" ");
+    let newStrArray=[];
+    stringArray.forEach(word=>{
+        newStrArray.push(word.charAt(0).toUpperCase() + word.slice(1))
+    });
+    newStrArray = newStrArray.join(" ");
+    console.log(newStrArray);
+
+    stringArray = newStrArray.split("-");
+    newStrArray=[];
+    stringArray.forEach(word=>{
+        newStrArray.push(word.charAt(0).toUpperCase() + word.slice(1))
+    });
+    string = newStrArray.join("-");
+    return string;
 }
 
 class Template{
@@ -68,3 +82,4 @@ module.exports={Template,curGenre,Capitalize};
 require('./loadingScreen.js');
 require('./movie-listings.js');
 require('./add-movie.js');
+require('./movie-info.js');
