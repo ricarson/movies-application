@@ -276,27 +276,35 @@ const buttons = {
   13: 'enter'
 };
 
-var konamiCheats = ['up', 'up', 'down', 'down', 'left', 'right', 'left', 'right', 'b', 'a', 'enter'];
 
-var konamiCodePosition = 0;
-
-
-$(document).keydown(function (e) {
-  var key = buttons[e.keyCode];
-  var requiredKey = konamiCheats[konamiCodePosition];
-
-  if (key === requiredKey) {
-    konamiCodePosition++;
-
-
-    if (konamiCodePosition === konamiCheats.length) {
-      cheater();
-      konamiCodePosition = 0;
-    }
-  }else {
-    konamiCodePosition = 0;
+function arraysEqual(arr1, arr2) {
+  if(arr1.length !== arr2.length)
+    return false;
+  for(var i = arr1.length; i--;) {
+    if(arr1[i] !== arr2[i])
+      return false;
   }
+  return true;
+}
+let cheatCodes = [{name:"Konami",fn:cheater,code:[38, 38, 40, 40, 37, 39, 37, 39, 66, 65, 13]}];
 
+var keyArr=[];
+$(document).keydown(function (e) {
+
+  // Add to end of array
+  keyArr.push(event.keyCode);
+  // Don't let array get longer than 50 keyCodes
+  if (keyArr.length>11){
+    keyArr.shift();
+  }
+  console.log(keyArr);
+
+  // If the key combos match what's in our cheatCodes array, call the function specified
+  cheatCodes.forEach(function(cheatOBJ){
+    if (arraysEqual(keyArr.slice(-(cheatOBJ.code.length)),cheatOBJ.code)){
+      cheatOBJ.fn();
+    }
+  })
 });
 
 function cheater() {
@@ -311,19 +319,4 @@ function cheater() {
   if(tempMoviesData.movie !=="") {
     window.open(tempMoviesData.movie);
   }
-  // var body = $('body');
-  // var colors = ['red', 'green', 'blue', 'yellow', 'pink', 'purple'];
-  // var currentIndex = 0;
-  // setInterval(function () {
-  //   body.css({
-  //     backgroundColor: colors[currentIndex]
-  //   });
-  //   if (!colors[currentIndex]) {
-  //     currentIndex = 0;
-  //   } else {
-  //     currentIndex++;
-  //   }
-  // }, 100);
-  // $("h1").css("font-size", "200px");
-  // $("object").css("visibility", "visible");
 }
