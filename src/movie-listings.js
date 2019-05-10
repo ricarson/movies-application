@@ -1,4 +1,7 @@
 const utils = require("./utils.js");
+
+const $ = require('jquery');
+
 const templateName = 'movie-listings';
 let ratingStars = `
     <div class="rate">
@@ -19,7 +22,7 @@ let template =`
             <button type="button" class="btn btn-dark" id="addMovie"><i class="fas fa-plus"></i> Add Movie</button>
         </div>
     </div>
-    <div class="row">
+    <div id="movieListing" class="row">
         {INSERT HERE}
     </div>
 `
@@ -27,7 +30,19 @@ const onload = (data) =>{
 
     let buffer = "";
 
-    data.forEach(({title, rating,poster,genres, id}) => {
+    let nameFilter = $("#movieSearch input").val().toLowerCase();
+    let tempMoviesData = data.reduce((accumulator, curMovie) => {
+        if (curMovie.title.toLowerCase().indexOf(nameFilter) !== -1) {
+            accumulator.push(curMovie);
+        }
+        return accumulator;
+    }, []);
+    tempMoviesData = tempMoviesData.sort(function(a, b) {
+        let textA = a.title.toUpperCase();
+        let textB = b.title.toUpperCase();
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    });
+    tempMoviesData.forEach(({title, rating,poster,genres, id}) => {
         if(genres.includes(utils.curGenre) || utils.curGenre ==="all") {
             buffer += "<div class='col-2 movie'>";
             buffer += `<div class="row"><div class="col-12"><img src="${poster}"></img></div></div>`;
@@ -37,7 +52,7 @@ const onload = (data) =>{
             curRating[parseInt(rating) - 1] += ' checked';
             curRating = curRating.join("></label>");
             buffer += `<div class="row rating"><div class="col-12">${curRating}</div></div>`;
-
+            buffer += `<span hidden>${id}</span>`;
             buffer += "</div>";
             console.log(`id#${id} - ${title} - rating: ${rating}`);
         }

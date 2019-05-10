@@ -15,21 +15,46 @@ const {getMovies} = require('./api.js');
 
 
 const utils = require('./utils.js');
+const ratingStars = require('./movie-info.js');
 const templates = utils.Template.templates;
 let moviesData;
 let genreList=["all"];
 
 console.log(utils.Template.templates);
 
-$(document).on('input','#movieSearch input',(e)=>{
-  let nameFilter = e.target.value.toLowerCase();
-  let tempMoviesData = moviesData.reduce((accumulator, curMovie) => {
-    if (curMovie.title.toLowerCase().indexOf(nameFilter) != -1) {
-      accumulator.push(curMovie);
+
+
+
+
+
+
+
+$(document).on('keypress',(e)=>{
+  // console.log($("#movieSearch input").val());
+  if($("#movieListing").length) {
+    $("#movieSearch input").focus();
+  }
+});
+
+$(document).ready(function() {
+  $(window).keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
     }
-    return accumulator;
-  }, []);
-  let buffer = templates["movie-listings"].unload(templates["movie-listings"],tempMoviesData);
+  });
+});
+
+$(document).on('click','.movie',(e)=> {
+  let buffer = templates["movie-listings"].unload(templates["movie-info"],[e.target,moviesData]);
+  $("#main").html(buffer);
+});
+
+
+
+
+$(document).on('input','#movieSearch input',(e)=>{
+  let buffer = templates["movie-listings"].unload(templates["movie-listings"],moviesData);
   $("#main").html(buffer);
 });
 
@@ -48,8 +73,10 @@ $('#main').html(templates["loadingScreen"].load());
 const processMovieData=movieData=>{
   moviesData = movieData;
 
-  let buffer = templates["loadingScreen"].unload(templates["movie-listings"],moviesData);
+  let buffer = templates["movie-listings"].load(moviesData);
   $("#main").html(buffer);
+
+
   genreList=["All"];
   moviesData.forEach(movie=>{
     genreList = [... new Set(genreList.concat(movie.genres))];
@@ -64,6 +91,14 @@ const processMovieData=movieData=>{
     `
   let gc=$("#genreContainer>.col");
   buffer="";
+
+  genreList = genreList.slice(1).sort(function(a, b) {
+    let textA = a.toUpperCase();
+    let textB = b.toUpperCase();
+    return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+  });
+  genreList.unshift("All");
+
   genreList.forEach(genre=>{
     genre = utils.Capitalize(genre);
     buffer+=(genreTemplate.replace("{GENRE}",genre));
@@ -83,6 +118,107 @@ $(document).on('click','#closeAddMovie',(e)=> {
   $("#main").html(buffer);
 });
 
+$(document).on('click','#closeEditMovie',(e)=> {
+  let buffer = templates["movie-info"].unload(templates["movie-listings"],moviesData);
+  console.log(buffer);
+  $("#main").html(buffer);
+});
+
+
+$(document).on('click','#deleteMovieButton',(e)=> {
+
+  let id = $("#movieID").text();
+
+  $.ajax({
+    type: 'DELETE',
+    url: `/api/movies/${id}`,
+    contentType: "application/json; charset=utf-8"
+  }).then().catch();
+
+  moviesData = moviesData.reduce((accumulator,movie)=>{
+    if(movie.id!=id){
+      accumulator.push(movie);
+    }
+    return accumulator;
+  },[]);
+  console.log(moviesData);
+
+  processMovieData(moviesData);
+
+  e.preventDefault();
+});
+
+$(document).on('input','#editMovieForm',(e)=>{
+  console.log("test");
+  let genres = $("#editMovieGenres").val().split(",");
+  genres = genres.map(genre=>{
+    return genre.trim().toLowerCase();
+  });
+  let title = $("#editMovieName").val();
+  let rating = $("#editMovieRating").val();
+
+  if (rating > 5) rating = 5;
+  if (rating < 1) rating = 1;
+
+  let poster = $("#editMoviePoster").val();
+  let id = $("#movieID").text();
+
+  let buffer="";
+  buffer += `<div class="row"><div class="col-12"><img src="${poster}"></img></div></div>`;
+  buffer += `<div class="row"><div class="col-12"><strong>${title}</strong></div></div>`;
+
+  let curRating = ratingStars.split('></label>');
+  curRating[parseInt(rating) - 1] += ' checked';
+  curRating = curRating.join("></label>");
+  buffer += `<div class="row rating"><div class="col-12">${curRating}</div></div>`;
+  buffer += `<span hidden>${id}</span>`;
+
+  $(".movie").html(buffer);
+});
+
+$(document).on('click','#editMovieSubmit',(e)=> {
+  let genres = $("#editMovieGenres").val().split(",");
+  genres = genres.map(genre=>{
+    return genre.trim().toLowerCase();
+  });
+  let title = $("#editMovieName").val();
+  let rating = $("#editMovieRating").val();
+  let poster = $("#editMoviePoster").val();
+
+  if (rating > 5) rating = 5;
+  if (rating < 1) rating = 1;
+  if(title && genres && rating){
+    let id = $("#movieID").text();
+    let data={
+      title,
+      rating,
+      genres,
+      poster,
+      id
+    };
+    moviesData = moviesData.map(movie=>{
+      if(movie.id==id){
+        return data;
+      }
+      return movie;
+    });
+    processMovieData(moviesData);
+
+    $.ajax({
+      type: 'DELETE',
+      url: `/api/movies/${id}`,
+      contentType: "application/json; charset=utf-8"
+    }).then().catch();
+
+    $.ajax({
+      type: 'POST',
+      url: `/api/movies/`,
+      data: JSON.stringify(data),
+      contentType: "application/json; charset=utf-8"
+    }).then().catch();
+  }
+  e.preventDefault();
+});
 
 $(document).on('click','#addMovieSubmit',(e)=> {
   let genres = $("#addMovieGenres").val().split(",");
@@ -103,16 +239,16 @@ $(document).on('click','#addMovieSubmit',(e)=> {
       poster
     };
 
-    let tdata = data
+    let tdata = data;
 
-    tdata.id = parseInt(moviesData.slice(-1)[0].id)+1
-    moviesData.push(tdata)
+    tdata.id = parseInt(moviesData.slice(-1)[0].id)+1;
+    moviesData.push(tdata);
 
     processMovieData(moviesData);
 
     $.ajax({
-      type: 'POST', 
-      url: '/api/movies', 
+      type: 'POST',
+      url: '/api/movies',
       data: JSON.stringify(data),
       contentType: "application/json; charset=utf-8"
     }).then().catch();

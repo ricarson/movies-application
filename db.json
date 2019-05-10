@@ -38,8 +38,8 @@
       "title": "Pokémon: Detective Pikachu",
       "rating": 3,
       "genres": [
-        "animation", 
-        "action", 
+        "animation",
+        "action",
         "adventure"
       ],
       "poster": "https://m.media-amazon.com/images/M/MV5BNDU4Mzc3NzE5NV5BMl5BanBnXkFtZTgwMzE1NzI1NzM@._V1_UX182_CR0,0,182,268_AL_.jpg",
@@ -49,8 +49,8 @@
       "title": "The Intruder (2019)",
       "rating": 2,
       "genres": [
-        "drama", 
-        "horror", 
+        "drama",
+        "horror",
         "mystery"
       ],
       "poster": "https://m.media-amazon.com/images/M/MV5BMzg1ZjcxNjgtMTliNC00NzU3LWE3NGMtZTBjMWFmYzk4OWE0XkEyXkFqcGdeQXVyMDA4NzMyOA@@._V1_UX182_CR0,0,182,268_AL_.jpg",
@@ -60,7 +60,7 @@
       "title": "Captain Marvel",
       "rating": 3,
       "genres": [
-        "action", 
+        "action",
         "adventure",
         "sci-fi"
       ],
@@ -71,12 +71,12 @@
       "title": "Shazam!",
       "rating": 4,
       "genres": [
-        "action", 
+        "action",
         "adventure",
         "comedy"
       ],
       "poster": "https://m.media-amazon.com/images/M/MV5BYTE0Yjc1NzUtMjFjMC00Y2I3LTg3NGYtNGRlMGJhYThjMTJmXkEyXkFqcGdeQXVyNTI4MzE4MDU@._V1_UX182_CR0,0,182,268_AL_.jpg",
-      "id": 6
+      "id": 7
     }
   ]
 }
