@@ -2,21 +2,34 @@
 const $ = require('jquery');
 
 
+let curGenre="all";
+
+const Capitalize=(string)=>{
+    return string.charAt(0).toUpperCase() + string.slice(1)
+}
 
 class Template{
-    constructor(name,htmlsource) {
+    constructor(name,htmlsource,onload) {
         this.name = name;
         this.html=htmlsource;
+        this.onload = onload;
+        this.loaded=false;
         Template.templates[this.name] = this;
     }
-    load () {
+    load (data) {
         this.loadCSS(`css/${this.name}.css`);
+        this.loaded=true;
+        if(this.onload){
+            this.html=this.onload(data);
+        }
         return this.html;
     }
-    unload (nextTemplate){
-        this.unloadCSS();
+    unload (nextTemplate,data) {
+        if (nextTemplate !== this) {
+            this.unloadCSS();
+        }
         if(nextTemplate)
-            return nextTemplate.load();
+            return nextTemplate.load(data);
         else
             return'';
     }
@@ -35,17 +48,22 @@ class Template{
         link.href = cssFile;
 
         // Append link element to HTML head
-        head.appendChild(link);
+        if(!this.loaded) {
+            head.appendChild(link);
+        }
 
         this.css = link
     }
     unloadCSS () {
+        console.log(this.css);
         $(this.css).remove();
+        this.loaded=false;
     }
 }
 Template.templates={};
-module.exports={Template};
+module.exports={Template,curGenre,Capitalize};
 
 
 
 require('./loadingScreen.js');
+require('./movie-listings.js');

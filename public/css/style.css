@@ -9,6 +9,7 @@
 html, body {
     height: 100%;
     margin:0;
+    background-color:var(--dark-bg-color);
 }
 
 .container-fluid {
@@ -20,25 +21,37 @@ html, body {
     background-color:var(--dark-bg-color);
     color:var(--light-text-color);
     text-align:right;
+    overflow:scroll;
+    height:100%;
     padding-top:2em;
+
 }
 #sidebar>.row{
     margin-bottom:2em;
 }
 #movieSearch{
 }
+
 #addGenre{
     text-align:left;
 }
 #genreContainer{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 #main{
     background-color:var(--dark-bg-color2);
     color:var(--light-text-color);
+    padding: 1em 2em 2em 2em;
+    height:100%;
+    overflow:scroll;
 }
 .genreListing {
     transition:all 0.5s ease;
     padding:0.5em 2em 0.5em 0em;
+    font-size:1.4em;
 
 }
 .genreListing:hover{

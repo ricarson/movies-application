@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <title>My Application</title>
-        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="stylesheet" href="css/style.css" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
@@ -17,36 +17,11 @@
                             <input class="form-control" type="text" placeholder="Search..">
                         </div>
                     </div>
-                    <div id="addGenre" class="row">
-                        <div class="col">
-                            <button class="btn btn-dark"><i class="fas fa-plus"></i> Add Genre</button>
-                        </div>
-                    </div>
                     <div id="genreContainer" class="row">
                         <div class="col">
                             <div class="row genreListing">
                                 <div class="col">
-                                    <span>test1</span>
-                                </div>
-                            </div>
-                            <div class="row genreListing">
-                                <div class="col">
-                                    <span>test2</span>
-                                </div>
-                            </div>
-                            <div class="row genreListing">
-                                <div class="col">
-                                    <span>test3</span>
-                                </div>
-                            </div>
-                            <div class="row genreListing">
-                                <div class="col">
-                                    <span>test4</span>
-                                </div>
-                            </div>
-                            <div class="row genreListing">
-                                <div class="col">
-                                    <span>test5</span>
+                                    <span>All</span>
                                 </div>
                             </div>
                         </div>
@@ -54,6 +29,23 @@
                 </div>
                 <div id="main" class="col">
 
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div id="addMovieNameRow" class="row">
+                            <input type="text" id="addMovieName" name="title">
+                        </div>
+                        <div id="addMovieRatingRow" class="row">
+                            <input type="text" id="addMovieRating" name="rating">
+                        </div>
+                        <div id="addMovieGenresRow" class="row">
+                            <input type="text" id="addMovieGenres" name="genres">
+                        </div>
+
+                        <div id="addMovieSubmitRow" class="row">
+                            <button type="submit" class="btn btn-dark" id="addMovieSubmit">Submit</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

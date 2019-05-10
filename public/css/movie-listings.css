@@ -1,0 +1,47 @@
+.movie {
+    height: 300px;
+    background-color:var(--dark-bg-color);
+    margin: 0.5em 1em 1em 1em;
+    padding: 1em;
+    border-radius: 5px;
+}
+
+.movie img {
+    width: 100%;
+    height: 200px;
+    border:5px solid black;
+    border-radius: 2px;
+}
+.addMovie{
+    text-align:right;
+}
+/*code for rating stars*/
+.rate {
+    float: left;
+    padding: 0 10px;
+    width: 100%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.rate > label {
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    font-size:20px;
+    color:#deb217;
+    margin: 0;
+}
+.rating{
+    position:absolute;
+    bottom:0;
+    width:100%;
+}
+.rate > label:before {
+    content: '★ ';
+}
+.rate label[checked] ~ label {
+    color: #ccc;
+}
+/*code for rating stars*/
