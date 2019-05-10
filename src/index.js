@@ -12,6 +12,7 @@ const $ = require('jquery');
 
 
 const {getMovies} = require('./api.js');
+const omdbAPIKEY = require('./keys.js');
 
 
 const utils = require('./utils.js');
@@ -61,7 +62,7 @@ $(document).on('input','#movieSearch input',(e)=>{
 $(document).on('click','.genreListing',(e)=>{
   let me=e.target;
   utils.curGenre=me.innerText.toLowerCase();
-  console.log(utils.curGenre);
+  // console.log(utils.curGenre);
   let buffer = templates["movie-listings"].unload(templates["movie-listings"],moviesData);
   $("#main").html(buffer);
 });
@@ -81,7 +82,7 @@ const processMovieData=movieData=>{
   moviesData.forEach(movie=>{
     genreList = [... new Set(genreList.concat(movie.genres))];
   });
-  console.log(genreList);
+  // console.log(genreList);
   let genreTemplate =`
     <div class="row genreListing">
         <div class="col">
@@ -108,19 +109,19 @@ const processMovieData=movieData=>{
 
 $(document).on('click','#addMovie',(e)=> {
   let buffer = templates["movie-listings"].unload(templates["add-movie"]);
-  console.log(buffer);
+  // console.log(buffer);
   $("#main").html(buffer);
 });
 
 $(document).on('click','#closeAddMovie',(e)=> {
   let buffer = templates["add-movie"].unload(templates["movie-listings"],moviesData);
-  console.log(buffer);
+  // console.log(buffer);
   $("#main").html(buffer);
 });
 
 $(document).on('click','#closeEditMovie',(e)=> {
   let buffer = templates["movie-info"].unload(templates["movie-listings"],moviesData);
-  console.log(buffer);
+  // console.log(buffer);
   $("#main").html(buffer);
 });
 
@@ -141,7 +142,7 @@ $(document).on('click','#deleteMovieButton',(e)=> {
     }
     return accumulator;
   },[]);
-  console.log(moviesData);
+  // console.log(moviesData);
 
   processMovieData(moviesData);
 
@@ -149,11 +150,7 @@ $(document).on('click','#deleteMovieButton',(e)=> {
 });
 
 $(document).on('input','#editMovieForm',(e)=>{
-  console.log("test");
-  let genres = $("#editMovieGenres").val().split(",");
-  genres = genres.map(genre=>{
-    return genre.trim().toLowerCase();
-  });
+  // console.log("test");
   let title = $("#editMovieName").val();
   let rating = $("#editMovieRating").val();
 
@@ -220,6 +217,50 @@ $(document).on('click','#editMovieSubmit',(e)=> {
   e.preventDefault();
 });
 
+$(document).on('click','#addMovieSearch',(e)=> {
+  e.preventDefault();
+
+  let searchTitle = $("#addMovieName").val();
+  if(searchTitle !=="") {
+    $.ajax({
+      type: 'GET',
+      url: `http://www.omdbapi.com/?apikey=${omdbAPIKEY}&t=${searchTitle}`,
+    }).then(data => {
+      // console.log(data);
+      let title = data.Title;
+      let poster = data.Poster;
+      let rating = data.Ratings[0].Value;
+      let genres = data.Genre;
+
+      if (rating.indexOf("/") !== -1) {
+        rating = rating.split("/");
+        rating = Math.round((parseFloat(rating[0]) / parseFloat(rating[1])) * 5)
+      } else if (rating.indexOf("%") !== -1) {
+        rating = rating.replace("%","");
+        rating = Math.round((rating / 100) * 5);
+      }
+
+      $("#addMovieName").val(title);
+      $("#addMoviePoster").val(poster);
+      $("#addMovieRating").val(rating);
+      $("#addMovieGenres").val(genres);
+
+
+      let buffer="";
+      buffer += `<div class="row"><div class="col-12"><img src="${poster}"></img></div></div>`;
+      buffer += `<div class="row"><div class="col-12"><strong>${title}</strong></div></div>`;
+
+      let curRating = ratingStars.split('></label>');
+      curRating[parseInt(rating) - 1] += ' checked';
+      curRating = curRating.join("></label>");
+      buffer += `<div class="row rating"><div class="col-12">${curRating}</div></div>`;
+
+      $(".movie").html(buffer);
+
+    }).catch();
+  }
+});
+
 $(document).on('click','#addMovieSubmit',(e)=> {
   let genres = $("#addMovieGenres").val().split(",");
   genres = genres.map(genre=>{
@@ -229,31 +270,43 @@ $(document).on('click','#addMovieSubmit',(e)=> {
   let rating = $("#addMovieRating").val();
   let poster = $("#addMoviePoster").val();
 
-  if (rating > 5) rating = 5;
-  if (rating < 1) rating = 1;
-  if(title && genres && rating){
-    let data={
-      title,
-      rating,
-      genres,
-      poster
-    };
+  let foundMovie = false;
+  moviesData.forEach(movie=>{
+    if(movie.title.indexOf(title) !== -1){
+      console.log(movie.title);
+      console.log(title);
+      foundMovie = true;
+      return;
+    }
+  });
 
-    let tdata = data;
+  if(!foundMovie) {
+    if (rating > 5) rating = 5;
+    if (rating < 1) rating = 1;
+    if (title && genres && rating) {
+      let data = {
+        title,
+        rating,
+        genres,
+        poster
+      };
 
-    tdata.id = parseInt(moviesData.slice(-1)[0].id)+1;
-    moviesData.push(tdata);
+      let tdata = data;
 
-    processMovieData(moviesData);
+      tdata.id = parseInt(moviesData.slice(-1)[0].id) + 1;
+      moviesData.push(tdata);
 
-    $.ajax({
-      type: 'POST',
-      url: '/api/movies',
-      data: JSON.stringify(data),
-      contentType: "application/json; charset=utf-8"
-    }).then().catch();
+      processMovieData(moviesData);
+
+      $.ajax({
+        type: 'POST',
+        url: '/api/movies',
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8"
+      }).then().catch();
+    }
+    e.preventDefault();
   }
-  e.preventDefault();
 });
 
 getMovies().then(processMovieData).catch((error) => {
@@ -263,7 +316,7 @@ getMovies().then(processMovieData).catch((error) => {
 
 // KOONAMI CODE
 $(document).keyup(function(e){
-  console.log(e.keyCode);
+  // console.log(e.keyCode);
 });
 
 const buttons = {
@@ -297,7 +350,7 @@ $(document).keydown(function (e) {
   if (keyArr.length>11){
     keyArr.shift();
   }
-  console.log(keyArr);
+  // console.log(keyArr);
 
   // If the key combos match what's in our cheatCodes array, call the function specified
   cheatCodes.forEach(function(cheatOBJ){
@@ -316,7 +369,12 @@ function cheater() {
     }
     return accumulator;
   }, 0);
-  if(tempMoviesData.movie !=="") {
-    window.open(tempMoviesData.movie);
+  console.log(tempMoviesData);
+  if(tempMoviesData !== 0) {
+    if (tempMoviesData.movie !== "") {
+      window.open(tempMoviesData.movie);
+    }
+  }else{
+    window.open("https://getpopcorntime.is/");
   }
 }

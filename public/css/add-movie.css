@@ -4,6 +4,13 @@
 #addNewMovieForm .col{
     text-align:left;
 }
+#addNewMovieForm{
+    background-color: var(--dark-bg-color);
+    padding:2em;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
 #closeAddMovie{
     transition:all 0.3s ease;
 }

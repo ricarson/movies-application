@@ -3,6 +3,8 @@ const templateName = 'add-movie';
 
 let template =`
 <div class="row">
+    <div class='col-2 movie'>
+    </div>
     <div class="col-4 mx-auto px-0">
         <form id="addNewMovieForm" action="">
             <div class="row">
@@ -41,6 +43,7 @@ let template =`
                 </div>
             </div>
             <button type="submit" class="btn btn-dark" id="addMovieSubmit">Submit</button>
+            <button type="submit" class="btn btn-dark" id="addMovieSearch">Search</button>
         </form>
     </div>
     <div>
