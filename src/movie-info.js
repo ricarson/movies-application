@@ -97,6 +97,9 @@ const onload = (data) => {
 
     let curRating = ratingStars.split('></label>');
     curRating[parseInt(tempMoviesData.rating) - 1] += ' checked';
+    if(parseInt(tempMoviesData.rating) != parseFloat(tempMoviesData.rating)){
+        curRating[parseInt(tempMoviesData.rating) - 1]+=" data-half"
+    }
     curRating = curRating.join("></label>");
     buffer += `<div class="row rating"><div class="col-12">${curRating}</div></div>`;
     buffer += `<span hidden>${id}</span>`;

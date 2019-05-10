@@ -166,6 +166,9 @@ $(document).on('input','#editMovieForm',(e)=>{
 
   let curRating = ratingStars.split('></label>');
   curRating[parseInt(rating) - 1] += ' checked';
+  if(parseInt(rating) != parseFloat(rating)){
+    curRating[parseInt(rating) - 1]+=" data-half"
+  }
   curRating = curRating.join("></label>");
   buffer += `<div class="row rating"><div class="col-12">${curRating}</div></div>`;
   buffer += `<span hidden>${id}</span>`;
@@ -253,6 +256,9 @@ $(document).on('click','#addMovieSearch',(e)=> {
 
       let curRating = ratingStars.split('></label>');
       curRating[parseInt(rating) - 1] += ' checked';
+      if(parseInt(rating) != parseFloat(rating)){
+        curRating[parseInt(rating) - 1]+=" data-half"
+      }
       curRating = curRating.join("></label>");
       buffer += `<div class="row rating"><div class="col-12">${curRating}</div></div>`;
 

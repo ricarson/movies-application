@@ -51,7 +51,6 @@ const onload = (data) =>{
 
             let curRating = ratingStars.split('></label>');
             curRating[parseInt(rating) - 1] += ' checked';
-            console.log(parseInt(rating) != parseFloat(rating));
             if(parseInt(rating) != parseFloat(rating)){
                 curRating[parseInt(rating) - 1]+=" data-half"
             }
