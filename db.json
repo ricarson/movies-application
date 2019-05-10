@@ -26,18 +26,6 @@
       "id": 2
     },
     {
-      "title": "Avengers: Endgame",
-      "rating": 4,
-      "genres": [
-        "action",
-        "adventure",
-        "fantasy"
-      ],
-      "poster": "https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SY1000_CR0,0,674,1000_AL_.jpg",
-      "movie": "https://www.gomoviestwo.online/movies/avengers-endgame-watch-online-movies-free/",
-      "id": 3
-    },
-    {
       "title": "Pokémon: Detective Pikachu",
       "rating": 3,
       "genres": [
@@ -86,15 +74,25 @@
       "id": 7
     },
     {
-      "title": "Ghostbusters",
+      "title": "Alien",
       "rating": "4",
       "genres": [
+        "horror",
+        "sci-fi"
+      ],
+      "poster": "https://m.media-amazon.com/images/M/MV5BMmQ2MmU3NzktZjAxOC00ZDZhLTk4YzEtMDMyMzcxY2IwMDAyXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg",
+      "id": 9
+    },
+    {
+      "title": "Avengers: Endgame",
+      "rating": "4.5",
+      "genres": [
         "action",
-        "comedy",
+        "adventure",
         "fantasy"
       ],
-      "poster": "https://m.media-amazon.com/images/M/MV5BMTkxMjYyNzgwMl5BMl5BanBnXkFtZTgwMTE3MjYyMTE@._V1_SX300.jpg",
-      "id": 8
+      "poster": "https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SY1000_CR0,0,674,1000_AL_.jpg",
+      "id": "3"
     }
   ]
 }

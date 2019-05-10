@@ -234,11 +234,12 @@ $(document).on('click','#addMovieSearch',(e)=> {
 
       if (rating.indexOf("/") !== -1) {
         rating = rating.split("/");
-        rating = Math.round((parseFloat(rating[0]) / parseFloat(rating[1])) * 5)
+        rating = (parseFloat(rating[0]) / parseFloat(rating[1])) * 5;
       } else if (rating.indexOf("%") !== -1) {
         rating = rating.replace("%","");
-        rating = Math.round((rating / 100) * 5);
+        rating = (rating / 100) * 5;
       }
+      rating = rating.toFixed(1);
 
       $("#addMovieName").val(title);
       $("#addMoviePoster").val(poster);
