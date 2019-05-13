@@ -300,14 +300,13 @@ $(document).on('click','#addMovieSubmit',(e)=> {
 
       let tdata = data;
 
-      tdata.id = parseInt(moviesData.slice(-1)[0].id) + 1;
       moviesData.push(tdata);
 
       processMovieData(moviesData);
 
       $.ajax({
         type: 'POST',
-        url: '/api/movies',
+        url: '/api/movies/',
         data: JSON.stringify(data),
         contentType: "application/json; charset=utf-8"
       }).then().catch();
